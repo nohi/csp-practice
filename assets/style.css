@@ -1,0 +1,23 @@
+#back {
+    position: fixed;
+    bottom: 2vh;
+    right: 3vh;
+    padding: 1em;
+
+    text-align: center;
+    color: white;
+    background-color: #000000;
+    border-radius: 10px;
+
+    & :link,
+    :visited {
+        color: white;
+    }
+}
+
+.item {
+    margin: 1em auto;
+    width: 100%;
+    padding: 1em 0;
+    border-top: 1px black solid;
+}

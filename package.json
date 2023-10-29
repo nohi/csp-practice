@@ -1,0 +1,11 @@
+{
+  "name": "csp-practice",
+  "version": "1.0.0",
+  "description": "Content-Security-Policy practice",
+  "main": "server.js",
+  "scripts": {
+    "serve": "node server.js"
+  },
+  "author": "nohi",
+  "license": "MIT"
+}

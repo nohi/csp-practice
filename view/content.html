@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- style-src cdn.jsdelivr.net -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css">
+
+    <!-- style-src 'self' -->
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <!-- style-src 'nonce nonceValue' -->
+    <style nonce="${nonceValue}">
+        body {
+            margin-left: 1em;
+            background-image: url("/assets/csp.webp");
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSP sample</h1>
+
+    <div class="item">
+        <!-- img-src 'self' -->
+        <h2>image (same origin)</h2>
+        <img src="/assets/sample.png"></img>
+    </div>
+
+    <div class="item">
+        <!-- img-src *.openstreetmap.org -->
+        <h2>image (external)</h2>
+        <img src="https://tile.openstreetmap.org/12/3563/1630.png"></img>
+        <div class="leaflet-control-attribution leaflet-control">
+            © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors
+        </div>
+    </div>
+
+    <div class="item">
+        <!-- media-src (未指定のため default-src が適用される) -->
+        <h2>video (same origin)</h2>
+        <video src="/assets/sample.mp4" autoplay muted loop></video>
+    </div>
+
+    <div class="item">
+        <!-- frame-src https://www.openstreetmap.org -->
+        <h2>iframe (external)</h2>
+        <iframe width="540" height="540"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=133.11017990112308%2C34.38042094971783%2C133.25351715087893%2C34.44188456156022&amp;layer=mapnik"
+            style="border: 1px solid black"></iframe><!-- style-src-attr 'unsafe-inline' -->
+    </div>
+
+    <div class="item">
+        <h2>inline javascript</h2>
+        <p id="inline-js-output"></p>
+
+        <!-- script-src 'nonce nonceValue' -->
+        <script type="text/javascript" nonce="${nonceValue}">
+            document.querySelector('#inline-js-output').innerText = 'Inline script executed.';
+        </script>
+    </div>
+
+    <div class="item">
+        <h2>load external javascript (code.jquery.com)</h2>
+        <p id="external-js-output"></p>
+
+        <!-- script-src https://code.jquery.com -->
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" nonce="${nonceValue}"
+            integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+        <!-- script-src 'nonce nonceValue' -->
+        <script type="text/javascript" nonce="${nonceValue}">
+            $(window).on("load", (ev) => $("#external-js-output").html('jquery loaded'));
+        </script>
+    </div>
+
+    <!-- script-src 'strict-dynamic' 'nonce nonceValue' -->
+    <div class="item">
+        <h2>dynamic load javascript</h2>
+        <script src="assets/dynamic-load.js" nonce="${nonceValue}"></script>
+        <p id="dynamic-load-js-output"></p>
+    </div>
+
+    <div id="back">
+        <a href="/">戻る</a>
+    </div>
+</body>
+
+</html>
